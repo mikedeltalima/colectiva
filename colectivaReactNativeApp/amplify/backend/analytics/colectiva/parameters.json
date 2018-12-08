@@ -1,0 +1,11 @@
+{
+    "appName": "colectiva",
+    "roleName": "pinpointLambdaRolebb520887",
+    "cloudWatchPolicyName": "cloudWatchPolicybb520887",
+    "pinpointPolicyName": "pinpointPolicybb520887",
+    "authPolicyName": "pinpoint_amplify_bb520887",
+    "unauthPolicyName": "pinpoint_amplify_bb520887",
+    "authRoleName": "colectiva-20181207181219-authRole",
+    "unauthRoleName": "colectiva-20181207181219-unauthRole",
+    "IAMPrefix": "018088383468"
+}

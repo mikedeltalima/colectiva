@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "colectiva-20181207181219-authRole",
+            "UnauthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "colectiva-20181207181219-deployment",
+            "UnauthRoleName": "colectiva-20181207181219-unauthRole",
+            "StackName": "colectiva-20181207181219",
+            "StackId": "arn:aws:cloudformation:us-west-2:018088383468:stack/colectiva-20181207181219/4f829640-fa86-11e8-8c33-0a3d4b08165a"
+        }
+    }
+}

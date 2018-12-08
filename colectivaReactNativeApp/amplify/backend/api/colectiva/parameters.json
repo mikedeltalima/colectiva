@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "colectiva",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito8492374f",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "schemaGraphql": "s3://colectiva-20181207181219-deployment/amplify-appsync-files/schema.graphql.1544237120259",
+    "ResolverBucket": "colectiva-20181207181219-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1544237120259"
+}

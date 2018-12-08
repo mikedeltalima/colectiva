@@ -2,40 +2,23 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-import Auth from '@aws-amplify/auth';
-import Analytics from '@aws-amplify/analytics';
+import { Button } from 'react-native';
+import Amplify, { Auth } from 'aws-amplify';
+import aws_exports from './src/aws-exports';
+Amplify.configure(aws_exports);
+// import { SignUp, withAuthenticator } from 'aws-amplify-react-native';
 
-import awsconfig from './aws-exports';
+import { SignUp, Authenticator } from 'aws-amplify-react-native';
 
-// retrieve temporary AWS credentials and sign requests
-Auth.configure(awsconfig);
-// send analytics events to Amazon Pinpoint
-Analytics.configure(awsconfig);
-
-const AnalyticsResult = document.getElementById('AnalyticsResult');
-const AnalyticsEventButton = document.getElementById('AnalyticsEventButton');
-let EventsSent = 0;
-AnalyticsEventButton.addEventListener('click', evt => {
-    Analytics.record('AWS Amplify Tutorial Event').then(evt => {
-        const url =
-            'https://console.aws.amazon.com/pinpoint/home/?region=us-east-1#/apps/' +
-            awsconfig.aws_mobile_analytics_app_id +
-            '/analytics/events';
-        AnalyticsResult.innerHTML = '<p>Event Submitted.</p>';
-        AnalyticsResult.innerHTML += '<p>Events sent: ' + ++EventsSent + '</p>';
-        AnalyticsResult.innerHTML +=
-            '<a href="' +
-            url +
-            '" target="_blank">View Events on the Amazon Pinpoint Console</a>';
-    });
-});
-
-export default class App extends React.Component {
+class App extends React.Component {
     state = {
         isLoadingComplete: false,
     };
 
     render() {
+        if (this.props.authState !== 'signedIn') {
+            return null;
+        }
         if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
             return (
                 <AppLoading
@@ -87,3 +70,51 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
 });
+
+class MySignUp extends SignUp {
+    async signIn() {
+        const result = await Expo.Facebook.logInWithReadPermissionsAsync(
+            '313019289545725',
+            {
+                permissions: ['public_profile', 'email'],
+            },
+        );
+        console.log(result);
+        const { type, token, expires_at: expires } = result;
+        if (type === 'success') {
+            const response = await fetch(
+                `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,first_name,last_name`,
+            );
+            const user = await response.json();
+            console.log(user);
+            // sign in with federated identity
+            const credentials = await Auth.federatedSignIn(
+                'facebook',
+                { token, expires },
+                user,
+            );
+            const userDetails = await Auth.currentAuthenticatedUser();
+            console.log('Current user info:', userDetails);
+        }
+    }
+
+    render() {
+        if (this.props.authState === 'signedIn') {
+            return null;
+        }
+        return <Button title="FBSignIn" onPress={this.signIn.bind(this)} />;
+    }
+}
+
+// export default withAuthenticator(App, true, [<MySignUp />]);
+
+export default class AuthApp extends React.Component {
+    render() {
+        return (
+            <Authenticator hideDefault={true}>
+                <MySignUp />
+                <App />
+            </Authenticator>
+        );
+    }
+}

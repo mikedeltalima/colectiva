@@ -84,19 +84,51 @@
 				"TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/auth/cognito8492374f-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "colectiva_identitypool_179394b3",
-					"allowUnauthenticatedIdentities": true,
-					"thirdPartyAuth": false,
+					"allowUnauthenticatedIdentities": false,
+					"thirdPartyAuth": true,
 					"lambdaLogPolicy": "colectiva_lambda_log_policy",
 					"openIdLambdaRoleName": "colectiva_openid_lambda_role",
 					"openIdRolePolicy": "colectiva_openid_pass_role_policy",
 					"openIdLambdaIAMPolicy": "colectiva_openid_lambda_iam_policy",
 					"openIdLogPolicy": "colectiva_openid_lambda_log_policy",
-					"authSelections": "identityPoolOnly",
+					"userPoolName": "colectiva402f5139_userpool_402f5139",
+					"autoVerifiedAttributes": "phone_number",
+					"mfaConfiguration": "OFF",
+					"mfaTypes": "SMS Text Message",
+					"roleName": "cognito8492374f_sns-role",
+					"roleExternalId": "cognito8492374f_role_external_id",
+					"policyName": "cognito8492374f-sns-policy",
+					"smsAuthenticationMessage": "Your authentication code is {####}",
+					"smsVerificationMessage": "Your verification code is {####}",
+					"emailVerificationSubject": "Your verification code",
+					"emailVerificationMessage": "Your verification code is {####}",
+					"defaultPasswordPolicy": false,
+					"passwordPolicyMinLength": 8,
+					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
+					"requiredAttributes": "phone_number",
+					"userpoolClientName": "cognito8492374f_app_client",
+					"userpoolClientGenerateSecret": true,
+					"userpoolClientRefreshTokenValidity": 30,
+					"userpoolClientReadAttributes": "email,name,phone_number,picture",
+					"mfaLambdaRole": "cognito8492374f_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognito8492374f_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognito8492374f_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognito8492374f_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognito8492374f_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognito8492374f_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognito8492374f_userpoolclient_lambda_iam_policy",
+					"userpoolClientSetAttributes": true,
+					"authSelections": "identityPoolAndUserPool",
 					"resourceName": "cognito8492374f",
 					"unAuthRoleName": "colectiva-20181207181219-unauthRole",
 					"authRoleName": "colectiva-20181207181219-authRole",
 					"unAuthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-unauthRole",
-					"authRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-authRole"
+					"authRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-authRole",
+					"useDefault": "manual",
+					"authProviders": "graph.facebook.com",
+					"facebookAppId": "313019289545725",
+					"userpoolClientWriteAttributes": "phone_number",
+					"selectedParties": "{\"graph.facebook.com\":\"313019289545725\"}"
 				}
 			}
 		},
@@ -114,6 +146,25 @@
 					"authRoleName": "colectiva-20181207181219-authRole",
 					"unauthRoleName": "colectiva-20181207181219-unauthRole",
 					"IAMPrefix": "018088383468"
+				}
+			}
+		},
+		"apicolectiva": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"Parameters": {
+					"AppSyncApiName": "colectiva",
+					"AuthCognitoUserPoolId": {
+						"Fn::GetAtt": [
+							"authcognito8492374f",
+							"Outputs.UserPoolId"
+						]
+					},
+					"schemaGraphql": "s3://colectiva-20181207181219-deployment/amplify-appsync-files/schema.graphql.1544237120259",
+					"ResolverBucket": "colectiva-20181207181219-deployment",
+					"ResolverRootKey": "amplify-appsync-files",
+					"DeploymentTimestamp": "1544237120259"
 				}
 			}
 		}

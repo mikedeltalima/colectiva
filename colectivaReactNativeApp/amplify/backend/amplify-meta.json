@@ -1,47 +1,85 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "colectiva-20181207181219-authRole",
-			"UnauthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-authRole",
-			"Region": "us-west-2",
-			"DeploymentBucketName": "colectiva-20181207181219-deployment",
-			"UnauthRoleName": "colectiva-20181207181219-unauthRole",
-			"StackName": "colectiva-20181207181219",
-			"StackId": "arn:aws:cloudformation:us-west-2:018088383468:stack/colectiva-20181207181219/4f829640-fa86-11e8-8c33-0a3d4b08165a"
-		}
-	},
-	"auth": {
-		"cognito8492374f": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/auth/cognito8492374f-cloudformation-template.yml",
-				"logicalId": "authcognito8492374f"
-			},
-			"lastPushTimeStamp": "2018-12-08T01:17:01.637Z",
-			"output": {
-				"IdentityPoolId": "us-west-2:dd6088f5-e089-4fca-a1ee-1cb52b5fe32b",
-				"IdentityPoolName": "colectiva_identitypool_179394b3"
-			},
-			"lastPushDirHash": "c13HJMsTnrJxtiO2OQEQewJCi9o="
-		}
-	},
-	"analytics": {
-		"colectiva": {
-			"service": "Pinpoint",
-			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
-				"logicalId": "analyticscolectiva"
-			},
-			"lastPushTimeStamp": "2018-12-08T01:17:01.637Z",
-			"output": {
-				"appName": "colectiva",
-				"Region": "us-east-1",
-				"Id": "70a392f5aa6c461da14e6bd4fdef3535"
-			},
-			"lastPushDirHash": "E8xSKpLf//UMAavjVd4lge739bc="
-		}
-	}
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "colectiva-20181207181219-authRole",
+            "UnauthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::018088383468:role/colectiva-20181207181219-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "colectiva-20181207181219-deployment",
+            "UnauthRoleName": "colectiva-20181207181219-unauthRole",
+            "StackName": "colectiva-20181207181219",
+            "StackId": "arn:aws:cloudformation:us-west-2:018088383468:stack/colectiva-20181207181219/4f829640-fa86-11e8-8c33-0a3d4b08165a"
+        }
+    },
+    "auth": {
+        "cognito8492374f": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/auth/cognito8492374f-cloudformation-template.yml",
+                "logicalId": "authcognito8492374f"
+            },
+            "lastPushTimeStamp": "2018-12-08T05:29:21.597Z",
+            "output": {
+                "IdentityPoolId": "us-west-2:dd6088f5-e089-4fca-a1ee-1cb52b5fe32b",
+                "IdentityPoolName": "colectiva_identitypool_179394b3",
+                "AppClientSecret": "1mhvmbec5msnh2mlm7n7sld7u2jnjiimcktp6c1khtjd4k4er3tp",
+                "UserPoolId": "us-west-2_IKj7S2Edv",
+                "AppClientIDWeb": "172dlg8tgv95gva3ca0g1ukfn6",
+                "AppClientID": "77o1qovk5n5dbndo0h9dilravj",
+                "FacebookWebClient": "313019289545725",
+                "UserPoolName": "colectiva402f5139_userpool_402f5139"
+            },
+            "lastPushDirHash": "WqiIHf5lxTcc8PWJvb9jxeJM+Fg=",
+            "[object Object]": {}
+        }
+    },
+    "analytics": {
+        "colectiva": {
+            "service": "Pinpoint",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+                "logicalId": "analyticscolectiva"
+            },
+            "lastPushTimeStamp": "2018-12-08T02:50:03.151Z",
+            "output": {
+                "appName": "colectiva",
+                "Region": "us-east-1",
+                "Id": "70a392f5aa6c461da14e6bd4fdef3535"
+            },
+            "lastPushDirHash": "E8xSKpLf//UMAavjVd4lge739bc="
+        }
+    },
+    "api": {
+        "colectiva": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "securityType": "AMAZON_COGNITO_USER_POOLS",
+                "GraphQLAPIIdOutput": "i5w4pmrqgnf5zi4k227yv427w4",
+                "GraphQLAPIEndpointOutput": "https://ahjny5xdnvfvtlhzurvrejjfua.appsync-api.us-west-2.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-hrs24ojryvgozm5pefcu7obar4",
+                "AuthCognitoUserPoolIdOutput": "us-west-2_IKj7S2Edv",
+                "AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_IKj7S2Edv",
+                "AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_IKj7S2Edv"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/colectiva-20181207181219-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apicolectiva"
+            },
+            "lastPushTimeStamp": "2018-12-08T02:50:04.572Z",
+            "lastPushDirHash": "JTyvv4002BeeXVYunVidO1ru8Go="
+        },
+        "Colectiva AppSync": {
+            "service": "AppSync",
+            "output": {
+                "securityType": "API_KEY",
+                "GraphQLAPIIdOutput": "miwpanmv5vd23lyqalxthcvfsm",
+                "GraphQLAPIEndpointOutput": "https://7dwspzeejrff7e63cezaaz3dte.appsync-api.us-west-2.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-ap23yotvubef7nyidyywo4lj44"
+            },
+            "lastPushTimeStamp": "2018-12-08T02:24:12.318Z"
+        }
+    }
 }
